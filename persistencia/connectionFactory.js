@@ -14,3 +14,14 @@ module.exports = function () {
     return createDBConnection;
 }
 
+//     con.connect(function (err) {
+//         if (err) throw err;
+//         console.log("----[LOG] Conectado ao banco...");
+//     });
+
+// return con;
+// }
+
+    
+
+ 
