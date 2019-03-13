@@ -26,7 +26,7 @@
         });
 
     });
-    
+  
     app.put('/pagamentos/pagamento/:id', function(req,res) {
 
         pagamento = {};
@@ -62,8 +62,7 @@
             req.status(400).send(400);
             return;
 
-        }
- 
+        } 
         //Pegar o corpo da requisição e salvar na variável pagamento       
         var pagamento = req.body;
         
@@ -80,10 +79,29 @@
                 console.log('Erro ao inserir no banco:' + erro);
                 res.status(500).send(erro);
             } else {
+                pagamento.id = resultado.insertId;                   
                 console.log('Pagamento criado.');
-                res.location('/pagamentos/pagamento/' + resultado.insertId);
+                res.location('/pagamentos/pagamento/' + pagamento.id);
 
-                res.status(201).json(pagamento);
+            var response = {
+                dados_do_pagamento: pagamento,
+                links: [
+                    {
+                        href: "http://localhost:3000/pagamentos/pagamento/" 
+                        + pagamento.id,
+                        rel: "confirmar",
+                        method: "PUT"
+                    },
+                    {
+                        href: "http://localhost:3000/pagamentos/pagamento/" 
+                        + pagamento.id,
+                        rel: "cancelar",
+                        method: "DELETE"
+                    }
+                ]  
+            }
+            res.status(201).json(response);
+
             } 
         });
 
