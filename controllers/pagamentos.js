@@ -10,7 +10,7 @@
         var id  = req.params.id;
         
         pagamento.id = id;
-        pagamento.status = 'CANCELADO';
+        pagamento.status = 'CANCELADO!';
 
         var connection = app.persistencia.connectionFactory();
         var pagamentoDao = new app.persistencia.PagamentoDao(connection);
@@ -20,7 +20,7 @@
                 res.send(500).send(erro);
                 return
             }
-            console.log('PAGAMENTO CANCELADO')
+            console.log('PAGAMENTO CANCELADO!')
             res.status(204).send(pagamento);
 
         });
@@ -43,7 +43,7 @@
                 res.send(500).send(erro);
                 return
             }
-            console.log('PAGAMENTO CRIADO')
+            console.log('PAGAMENTO CRIADO!')
             res.send(pagamento);
 
         });
@@ -58,7 +58,7 @@
         var erros = req.validationErrors();
 
         if(erros){
-            console.log("Erros de validacao encontrados");
+            console.log("Erros de validacao encontrados!!");
             req.status(400).send(400);
             return;
 
@@ -68,7 +68,7 @@
         
         console.log('Processando uma requisição de um novo pagamento..');
         
-        pagamento.status = 'CRIADO';
+        pagamento.status = 'CRIADO!';
         pagamento.date = new Date;
         
         var connection = app.persistencia.connectionFactory();
