@@ -4,22 +4,18 @@ var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
 
 module.exports = function(){
-    var app = express();
+  var app = express();
 
-    app.use(bodyParser.urlencoded({extended: true}));
-    app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({extended: true}));
+  app.use(bodyParser.json());
 
-    //valida a requisição
-    app.use(expressValidator());
-    
-    //gerencia as rotas e dá autorização
-    consign()
-        .include('controllers')
-        .then('persistencia')
-        .into(app);
-    
+  app.use(expressValidator());
 
-    return app;
+  consign()
+   .include('controllers')
+   .then('persistencia')
+   .then('servicos')
+   .into(app);
 
-};
-
+  return app;
+}
